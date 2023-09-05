@@ -7,17 +7,10 @@ public class MatrixFactory implements IMatrixFactory {
     private MatrixFactory() {
     }
 
-    /**
-     * TODO: Implement
-     */
     @Override
     public IMatrix create(double[][] data) {
-        return null;
+        return new Matrix(data);
     }
-
-    /**
-     * TODO: Implement
-     */
     @Override
     public IMatrix createDiagonal(double[] diagonal) {
         return null;
