@@ -11,21 +11,22 @@ public class MatrixFactory implements IMatrixFactory {
     public IMatrix create(double[][] data) {
         return new Matrix(data);
     }
+
     @Override
     public IMatrix createDiagonal(double[] diagonal) {
-        if (diagonal.length == 0) {
+        if (diagonal.length == 0)
             throw new IllegalArgumentException();
-        }
         double[][] matrixDiagonal = new double[diagonal.length][diagonal.length];
-        for (int i = 0; i < diagonal.length; i++)
+        for (int i = 0; i < diagonal.length; i++) {
             matrixDiagonal[i][i] = diagonal[i];
+        }
         return new Matrix(matrixDiagonal);
     }
+
     @Override
     public IMatrix createIdentity(int size) {
-        if (size < 0) {
+        if (size < 0)
             throw new IllegalArgumentException();
-        }
         double[][] matrixIdentity = new double[size][size];
         for (int i = 0; i < size; i++) {
             matrixIdentity[i][i] = 1;
