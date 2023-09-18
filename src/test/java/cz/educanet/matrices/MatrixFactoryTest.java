@@ -25,16 +25,21 @@ class MatrixFactoryTest {
 
     @Test
     void createDiagonal() {
-        double[][] validDiagonals = new double[][]{
+        double[][] expectedMatrix = new double[][]{
                 {2, 4, 6, 10, 12},
                 {4, 5, 6, 7, 8}};
 
-        for (int i = 0; i < validDiagonals.length; i++) {
-            double[] diagonal = validDiagonals[i];
+        for (int i = 0; i < expectedMatrix.length; i++) {
+            double[] diagonal = expectedMatrix[i];
             IMatrix matrix = matrixFactoryInstance.createDiagonal(diagonal);
             for (int j = 0; j < diagonal.length; j++) {
                 for (int k = 0; k < diagonal.length; k++) {
-                    Assertions.assertEquals(j == k ? diagonal[j] : 0, matrix.get(j, k));
+                    if (j == k) {
+                        Assertions.assertEquals(diagonal[j], matrix.get(j, k));
+                    }
+                    else {
+                        Assertions.assertEquals(0, matrix.get(j, k));
+                    }
                 }
             }
         }
@@ -63,10 +68,9 @@ class MatrixFactoryTest {
         int[] validSizes = {3, 5, 7, 10};
 
         for (int i = 0; i < validSizes.length; i++) {
-            int size = validSizes[i];
-            IMatrix matrix = matrixFactoryInstance.createZero(size);
-            Assertions.assertEquals(size, matrix.getRows());
-            Assertions.assertEquals(size, matrix.getColumns());
+            IMatrix matrix = matrixFactoryInstance.createZero(validSizes[i]);
+            Assertions.assertEquals(validSizes[i], matrix.getRows());
+            Assertions.assertEquals(validSizes[i], matrix.getColumns());
             for (int j = 0; j < matrix.getRows(); j++) {
                 for (int k = 0; k < matrix.getColumns(); k++) {
                     Assertions.assertEquals(0, matrix.get(j, k));
