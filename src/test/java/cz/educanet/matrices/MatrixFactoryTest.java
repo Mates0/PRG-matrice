@@ -14,11 +14,9 @@ class MatrixFactoryTest {
                 {5, 6, 7}
         };
 
-        IMatrix matrixInstance = MatrixFactory.instance.create(matrix);
-
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[i].length; j++) {
-                Assertions.assertEquals(matrix[i][j], matrixInstance.get(i, j));
+                Assertions.assertEquals(matrix[i][j], matrixFactoryInstance.create(matrix).get(i, j));
             }
         }
     }

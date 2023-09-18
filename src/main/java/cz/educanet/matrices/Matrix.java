@@ -74,11 +74,13 @@ public class Matrix implements IMatrix {
 
     @Override
     public boolean isDiagonal() {
-        if (!isSquare())
+        if (!isSquare()) {
             throw new IllegalArgumentException();
+        }
         double[][] matrixDiagonal = new double[rawArray.length][rawArray[0].length];
-        for (int i = 0; i < rawArray.length; i++)
+        for (int i = 0; i < rawArray.length; i++) {
             matrixDiagonal[i][i] = rawArray[i][i];
+        }
         return Arrays.deepEquals(matrixDiagonal, rawArray);
     }
 
@@ -101,9 +103,9 @@ public class Matrix implements IMatrix {
 
     @Override
     public int getColumns() {
-        if (getRows() > 0)
+        if (getRows() > 0) {
             return rawArray[0].length;
-
+        }
         return 0;
     }
 
