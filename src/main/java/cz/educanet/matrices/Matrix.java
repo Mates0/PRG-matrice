@@ -8,36 +8,53 @@ public class Matrix implements IMatrix {
         this.rawArray = rawArray;
     }
 
-    /**
-     * TODO: Implement
-     */
     @Override
     public IMatrix times(IMatrix matrix) {
-        return null;
+        double[][] data = new double[getRows()][matrix.getColumns()];
+
+        for (int i = 0; i < getRows(); i++) {
+            for (int j = 0; j < matrix.getColumns(); j++) {
+                for (int k = 0; k < getColumns(); k++) {
+                    data[i][j] += get(i, k) * matrix.get(k, j);
+                }
+            }
+        }
+
+        return new Matrix(data);
     }
 
-    /**
-     * TODO: Implement
-     */
     @Override
     public IMatrix times(Number scalar) {
-        return null;
+        double[][] timedMatrix = rawArray;
+        for (int i = 0; i < timedMatrix.length; i++) {
+            for (int j = 0; j < timedMatrix[i].length; j++) {
+                timedMatrix[i][j] *= (int) scalar;
+            }
+        }
+        return new Matrix(timedMatrix);
     }
 
-    /**
-     * TODO: Implement
-     */
     @Override
     public IMatrix add(IMatrix matrix) {
-        return null;
+        double[][] timedMatrix = rawArray;
+        for (int i = 0; i < timedMatrix.length; i++) {
+            for (int j = 0; j < timedMatrix[0].length; j++) {
+                timedMatrix[i][j] += matrix.get(i, j);
+            }
+        }
+        return new Matrix(timedMatrix);
     }
 
-    /**
-     * TODO: Implement
-     */
     @Override
     public IMatrix transpose() {
-        return null;
+        double[][] inputMatrix = rawArray;
+        double[][] tMatrix = new double[rawArray.length][rawArray[0].length];
+        for (int i = 0; i < inputMatrix.length; i++) {
+            for (int j = 0; j < inputMatrix[0].length; j++) {
+                tMatrix[i][j] = inputMatrix[j][i];
+            }
+        }
+        return new Matrix(tMatrix);
     }
 
     /**
@@ -48,12 +65,9 @@ public class Matrix implements IMatrix {
         return 0;
     }
 
-    /**
-     * TODO: Implement
-     */
     @Override
     public boolean isSquare() {
-        return false;
+        return rawArray.length == rawArray[0].length;
     }
 
     /**
@@ -87,7 +101,7 @@ public class Matrix implements IMatrix {
 
     @Override
     public double get(int n, int m) {
-        if(n >= getRows() || n < 0 || m >= getColumns() || m < 0)
+        if (n >= getRows() || n < 0 || m >= getColumns() || m < 0)
             throw new IllegalArgumentException();
 
         return rawArray[n][m];
